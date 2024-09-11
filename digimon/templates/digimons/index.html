@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/digimons/digimon-index.css' %}"/>
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <img src="{% static 'images/Digimon-Logo-Transparent.png' %}" alt="The Digimon Logo2" />
+  <img src="{% static 'images/Koromon.webp' %}" alt="A cool cat" />
+  <img src="{% static 'images/Tsunomon.webp' %}" alt="A happy cat" />
+  <img src="{% static 'images/Mochimon.jpg' %}" alt="A cat in a teacup" />
+  <img src="{% static 'images/Chibimon.jpg' %}" alt="A cat in a box" />
+</section>
+
+<section class="card-container">
+    {% for digimon in digimons %}
+      <div class="card">
+        <a href="{% url 'digimon-detail' digimon.id %}">
+          <div class="card-content">
+            <div class="card-img-container">
+              <img
+                src="{% static 'images/Digivice.png' %}"
+                alt="A skater boy cat"
+              />
+            </div>
+            <h2 class="card-title">{{ digimon.name }}</h2>
+            <p>A {{ digimon.type }} type {{ digimon.level }}</p>
+            <p><small>{{ digimon.description }}</small></p>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </section>
+  
+
+{% endblock %}
