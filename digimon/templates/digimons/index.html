@@ -16,7 +16,7 @@
 <section class="card-container">
     {% for digimon in digimons %}
       <div class="card">
-        <a href="{% url 'digimon-detail' digimon.id %}">
+        <a href="{% url 'digimon_detail' digimon.id %}">
           <div class="card-content">
             <div class="card-img-container">
               <img
@@ -25,7 +25,7 @@
               />
             </div>
             <h2 class="card-title">{{ digimon.name }}</h2>
-            <p>A {{ digimon.type }} type {{ digimon.level }}</p>
+            <p>A {{ digimon.type }} type {{ digimon.level }} Digimon</p>
             <p><small>{{ digimon.description }}</small></p>
           </div>
         </a>

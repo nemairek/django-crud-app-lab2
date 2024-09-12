@@ -8,10 +8,14 @@
   <div class="cat-img">
     <img src="{% static 'images/Digitama.jpg' %}" alt="A skater boy cat" />
   </div>
-  <div class="cat-details">
+  <div class="digimon-details">
     <h1>{{ digimon.name }}</h1>
-    <p>A {{ digimon.type }} type {{ digimon.level }}</p>
+    <p>A {{ digimon.type }} type {{ digimon.level }} Digimon</p>
     <p><small>{{ digimon.description }}</small></p>
+  </div>
+  <div class="digimon-actions">
+    <a href="{% url 'digimon_update' digimon.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'digimon_delete' digimon.id %}" class="btn danger">Delete</a>
   </div>
 </section>
 {% endblock %}
