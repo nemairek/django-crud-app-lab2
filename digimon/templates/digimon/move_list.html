@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/toys/move-index.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>All Moves</h1>
+  <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+  <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+  <img src="{% static 'images/post.svg' %}" alt="A scratching post" />
+  <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+</section>
+
+<section class="card-container">
+  {% for move in move_list %}
+    <div class="card" style="border-color: green">
+      <div class="card-bg" style="background-color: gold"></div>
+      <a href="{% url 'move_detail' move.id %}">
+        <div class="card-content">
+          <h2>{{ move.name }}</h2>
+          <p>A {{ move.description }} toy</p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

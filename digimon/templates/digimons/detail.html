@@ -18,4 +18,90 @@
     <a href="{% url 'digimon_delete' digimon.id %}" class="btn danger">Delete</a>
   </div>
 </section>
+
+<section class="toys">
+    <div class="subsection-title">
+      <h2>Moves</h2>
+      <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+      <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+      <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+    </div>
+
+    <!-- displaying a cat's toys -->
+    <h3>{{ digimon.name }}'s Moves</h3>
+    <div class="subsection-content">
+      {% if digimon.moves.count %} 
+        {% for move in digimon.moves.all %}
+          <div class="toy-container">
+            <div class="color-block" style="background-color: silver"></div>
+            <a href="{% url 'move_detail' move.id %}">
+                <h1>  {{ move.name }} </h1>
+                <p> {{ move.description }}</p>
+              <form action="{% url 'remove_move' digimon.id move.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Remove Move</button>
+              </form>
+            </a>
+          </div>
+        {% endfor %} 
+      {% else %}
+        <p class="no-toys">{{digimon.name}} doesn't know any moves</p>
+      {% endif %}
+    </div>
+  
+
+  <h3>Learnable Moves</h3>
+  <div class="subsection-content">
+    {% if moves.count %} 
+      {% for move in moves.all %}
+        <div class="toy-container">
+          <div class="color-block" style="background-color: gold"></div>
+          <a href="{% url 'move_detail' move.id %}">
+            <h1>  {{ move.name }} </h1>
+            <p> {{ move.description }}</p>
+          </a>
+          <form action="{% url 'associate_move' digimon.id move.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn submit">Teach move</button>
+          </form>
+        </div>
+      {% endfor %} 
+    {% else %}
+      <p class="all-toys">{{digimon.name}} already knows all the learnable moves🥳</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="feedings-toy-container">
+  <section class="feedings">
+    <div class="subsection-title">
+      <h2>Crests</h2>
+      <img
+        src="{% static 'images/cat-cone.svg' %}"
+        alt="An ice cream cone cat"
+      />
+      <img src="{% static 'images/cat-onigiri.svg' %}" alt="A cat as onigiri" />
+      <img
+        src="{% static 'images/kitty-kabob.svg' %}"
+        alt="A kabob of kittens"
+      />
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>   
+        </tr>
+      </thead>
+      <tbody>
+        {% for digicrest in digimon.digicrest_set.all %}
+          <tr>
+            <td>{{digicrest.name}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+
 {% endblock %}

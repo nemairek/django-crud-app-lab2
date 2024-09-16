@@ -23,11 +23,24 @@
       </div>
       <nav>
         <ul>
-          <li><a href="{% url 'about' %}">About</a></li> 
-          <li><a href="{% url 'digimon_create' %}">Add Digimon</a></li>
-          <li><a href="{% url 'digimon_index' %}">All Digimon</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'digimon_index' %}">All Digimon</a></li>
+            <li><a href="{% url 'move_index' %}">All Moves</a></li>
+            <li><a href="{% url 'digimon_create' %}">Add Digimon</a></li>
+            <li><a href="{% url 'move_create' %}">Add Moves</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li>
+              <form id="logout-form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+              </form>
+            </li>
+          {% else %}
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'home' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          {% endif %}
         </ul>
-      </nav>
     </header>
     <main>
      {% block content %} 
